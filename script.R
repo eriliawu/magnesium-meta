@@ -209,20 +209,3 @@ sum(exp(mag.sim.skp$deltanew) < 1) / length(mag.sim.skp$deltanew) # 0.68
 # clinical superiority
 sum(exp(mag.sim.ref$deltanew) < 0.9) / length(mag.sim.ref$deltanew) # 0.87
 sum(exp(mag.sim.skp$deltanew) < 0.9) / length(mag.sim.skp$deltanew) # 0.62
-
-##### testing rstan ############################################################
-set_cppo('fast')
-set_cppo('debug')
-
-install.packages("inline")
-install.packages("Rcpp")
-library(inline) 
-library(Rcpp)
-src <- ' 
-std::vector<std::string> s; 
-s.push_back("hello");
-s.push_back("world");
-return Rcpp::wrap(s);
-'
-hellofun <- cxxfunction(body = src, includes = '', plugin = 'Rcpp', verbose = FALSE)
-cat(hellofun(), '\n') 
